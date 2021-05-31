@@ -1,25 +1,23 @@
-name: Check Markdown Links
+name: 🔗 Check Markdown Links
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
+on: [push, pull_request]
 
 jobs:
   markdown-link-check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - name: link-check
-        uses: gaurav-nelson/github-action-markdown-link-check@820c0581641b6e2fb34ae4d5f93ef4d841fb37e6
+        uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
-          use-quiet-mode: 'yes'
-          use-verbose-mode: 'yes'
+          use-quiet-mode: 'yes' # show only errors
+          use-verbose-mode: 'yes' # show detailed HTTP status
+          # check-modified-files-only: 'yes'
           config-file: '.github/workflows/config/mlc_config.json'
-          folder-path: '.'
+
+# known issues: https://developer.android.com
+# https://github.com/tcort/link-check/issues/46
+# https://github.com/tcort/markdown-link-check/issues/159
